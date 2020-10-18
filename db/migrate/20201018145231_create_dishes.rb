@@ -7,9 +7,5 @@ class CreateDishes < ActiveRecord::Migration
       t.timestamps null: false
     end
 
-    create_table :events_dishes, id:false do |t|
-      t.belongs_to :event
-      t.belongs_to :dish
-    end
   end
 end
