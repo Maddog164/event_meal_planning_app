@@ -7,5 +7,6 @@ end
 #this is where I will mount other controller 'use'
 
 #in order to send PATCH and DELETE requests I need this code 'use Rack::MethodOverride'
+use Rack::MethodOverride
 
 run ApplicationController

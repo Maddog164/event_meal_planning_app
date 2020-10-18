@@ -15,7 +15,7 @@ ActiveRecord::Schema.define(version: 20201018145231) do
 
   create_table "dishes", force: :cascade do |t|
     t.string   "name"
-    t.string   "type"
+    t.string   "dish_type"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
