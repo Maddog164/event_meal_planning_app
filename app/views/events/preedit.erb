@@ -1,0 +1,8 @@
+<form action="/events/<%= @event.id %>" method="POST">
+<% if @events != nil && @events !=[] %>
+        <h2>Select an Event: </h2>
+         <% @events.each do |event| %>
+            <input type="checkbox" name= "event[name][]" id="<%= event.name %>" value="<%= event.name %>">    <%= event.name %>  <%= event.date %><br>
+        <% end %>
+<% end %>
+</form>
