@@ -3,17 +3,22 @@
 <form action="/events" method="POST">
   
 
-  <br>
+<br>
   
-  <% if @events != nil && @events !="" %>
-  <h2>Select an existing Event or create a new one below. </h2>
-    <h3>Existing Events</h3>
-  <%    @events.each do |event| %>
-        <input type="checkbox" name= "event[name][]" id="<%= event.name %>" value="<%= event.name %>">    <%= event.name %><br>
-<%    end %>
-    <% end %>
-    <input type="submit" value="Edit this Event">
-  <br>
+<% if @events != nil && @events !=[] %>
+        <h2>Select an existing Event or create a new one below. </h2>
+        <h3>Existing Events</h3>
+        <% @events.each do |event| %>
+            <input type="checkbox" name= "event[name][]" id="<%= event.name %>" value="<%= event.name %>">    <%= event.name %><br>
+        <% end %>
+    <% else %>
+            <h2>Enter a Name for your New Event</h2>
+            <input type="text" name="@new_event_name" placeholder="Name of New  Event">
+            <input type="text" name="@new_event_date" placeholder="Date of New  Event">
+            <br>
+            <br>
+            <input type="submit" value="Create New Event" id="<%= @new_event_name %>" value="<%= @new_event_name %>">
 
-  
+<% end %>
+<br>
 </form>
