@@ -41,10 +41,10 @@ class ApplicationController < Sinatra::Base
 
   post "/login" do
     @user = User.find_by(:name => params[:name])
-    binding.pry
+    # binding.pry
 		if @user && @user[:name]!="" && @user.authenticate(params[:password])
 			session[:user_id] = @user.id
-			redirect "/event"
+      redirect "/events/new"
 		else
 			redirect "/failure"
 		end
@@ -58,6 +58,38 @@ class ApplicationController < Sinatra::Base
     session.clear
     redirect "/"
   end
+
+#   get "/events" do
+#     binding.pry
+#     @events = Event.all
+#     binding.pry
+#     erb :'/events/new' 
+#  end
+ 
+ get '/events/new' do
+    @events = Event.all
+    @dishes = Dish.all
+    binding.pry 
+    erb :'/events/new'
+ end
+
+ post '/events' do
+  binding.pry
+  @event = Event.where(name: params[:event][:name])
+  binding.pry
+  redirect "events/#{@event.id}/edit"
+end
+
+get '/events/:id/edit' do 
+  @event = Event.find(params[:id])
+  @dishes = Dish.all
+  erb :'/events/edit'
+end
+
+get '/events/:id' do 
+  @event = Event.find(params[:id])
+  erb :'/events/show'
+end
 
   helpers do
     def logged_in?

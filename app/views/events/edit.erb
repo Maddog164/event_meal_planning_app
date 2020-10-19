@@ -1,0 +1,29 @@
+<h1>Update Event</h1>
+ 
+<h2>Edits for <%= @event.name %></h2>
+ 
+  <form action="/events/<%= @event.id %>" method="POST">
+    <input id="hidden" type="hidden" name="_method" value="patch">
+    <label>Edit the Event's Name:</label>
+    <br>
+    <input type="text" name="event[name]" value="<%= @event.name %>">
+ 
+    <br>
+    <p>Select from existing dishes to add to your event, or add a new one below:</p>
+ 
+ 
+    <h3>Existing Dishes</h3>
+    <% @dishes.each do |dish| %>
+      <input type="checkbox" name="dish.name" id="<%= dish.id %>" value="<%= dish.id %>" <%='checked' if @event.dishes.include?(dish) %>>  <%= dish.name %></input><br>
+    <% end %>
+    <br>
+ 
+    <h3>New Dish</h3>
+    <label>Name of Dish: </label>
+    <br>
+    <input type="text" name="dish[name]" id="dish_name"></input>
+    <input type = "text" name="dish[type]" id ="dish_type"></input>
+    <br><br>
+ 
+    <input type="submit" value="Update Event">
+  </form>

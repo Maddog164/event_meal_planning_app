@@ -1,0 +1,8 @@
+index.erb
+<% if @events != nil && @events !="" %>
+  <p>Select an existing Event or create a new one below. </p>
+    <h3>Existing Events</h3>
+  <%    @events.each do |event| %>
+        <input type="checkbox" name="event[name]" id="<%= event.id %>" value="<%= event.id %>"><%= event.name %><br>
+  <%    end %>
+    <% end %>
