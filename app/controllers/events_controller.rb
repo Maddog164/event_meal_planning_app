@@ -17,7 +17,8 @@ class EventsController < ApplicationController
     end
     
     get '/events/new' do
-        binding.pry
+        # binding.pry
+        @user = User.find(session[:user_id])
         @events = Event.where(user_id: "#{session[:user_id]}")
         @dishes = Dish.all
         @new_event_name = ""
@@ -29,13 +30,13 @@ class EventsController < ApplicationController
     end
     
      post '/events' do
-      binding.pry
+    #   binding.pry
       if !Event.exists?(name: "#{@new_event_name}")
         @event = Event.new(:name=>"#{@new_event_name}",:date=>"#{@new_event_date}",:user_id=>session[:user_id])
         @event.save
       end #if
       @event = Event.where(name: params[:event][:name])
-      binding.pry
+    #   binding.pry
       redirect "events/#{@event.id}/edit"
     end
     

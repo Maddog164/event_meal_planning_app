@@ -9,7 +9,7 @@ class UsersController < ApplicationController
       
     post "/signup" do
         user = User.new(:name => params[:name], :password => params[:password])
-        binding.pry
+        # binding.pry
         if user.save && user[:name]!=""
             redirect "/login"
         else
@@ -24,7 +24,7 @@ class UsersController < ApplicationController
     post "/login" do
         @user = User.find_by(:name => params[:name])
         if @user && @user[:name]!="" && @user.authenticate(params[:password])
-            binding.pry
+            # binding.pry
             session[:user_id] = @user.id
             redirect "/events/new"
         else

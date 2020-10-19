@@ -1,7 +1,11 @@
-<h1>Your Events</h1>
+<h1>Hi <%= "#{@user.name}" %></h1>
 
 <form action="/events" method="POST">
-  
+<% if @events = nil || @events =[] %>
+    <h2>You do not currently have any defined Events </h2> 
+<% else %>
+    <h2>Your Events: </h2>
+<% end %>
 
 <br>
   
@@ -12,7 +16,7 @@
             <input type="checkbox" name= "event[name][]" id="<%= event.name %>" value="<%= event.name %>">    <%= event.name %><br>
         <% end %>
     <% else %>
-            <h2>Enter a Name for your New Event</h2>
+            <h2>Enter a Name and Date for your New Event</h2>
             <input type="text" name="@new_event_name" placeholder="Name of New  Event">
             <input type="text" name="@new_event_date" placeholder="Date of New  Event">
             <br>
