@@ -30,19 +30,22 @@ class EventsController < ApplicationController
     end
 
     get '/events/new2' do
-
+      # binding.pry
       erb :'/events/new2'
     end
     
      post '/events' do
-    #   binding.pry
-      if !Event.exists?(name: "#{@new_event_name}")
-        @event = Event.new(:name=>"#{@new_event_name}",:date=>"#{@new_event_date}",:user_id=>session[:user_id])
+      # binding.pry
+      hold_name = params[:"@new_event_name"]
+      hold_date = params[:"@new_event_date"]
+      if !Event.exists?(name: [hold_name])
+        @event = Event.new(:name=>hold_name,:date=>hold_date,:user_id=>session[:user_id])
         @event.save
       end #if
-      @event = Event.where(name: params[:event][:name])
-    #   binding.pry
-      redirect "events/#{@event.id}/edit"
+      # binding.pry
+      @event = Event.where(name: hold_name)
+      binding.pry
+      redirect "events/#{@event[0].id}/edit"
     end
 
     get '/events/preedit' do

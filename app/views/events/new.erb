@@ -1,6 +1,5 @@
 <h1>Hi <%= "#{@user.name}!" %></h1>
 
-<form action="/events" method="POST">
 <% if @events == nil || @events == [] %>
     <h2>You do not currently have any defined Events </h2> 
 <% else %>
