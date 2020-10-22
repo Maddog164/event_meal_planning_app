@@ -3,6 +3,10 @@ require "./app/models/user"
 
 class UsersController < ApplicationController
 
+    get "/" do
+        erb :'users/index'
+      end
+
     get "/signup" do
         erb :'users/signup'
     end
@@ -28,15 +32,11 @@ class UsersController < ApplicationController
             session[:user_id] = @user.id
             redirect "/events/new"
         else
-            redirect "users/failure"
+            erb :'users/failure'
         end
     end
     
-    get "/failure" do
-        erb :'users/failure'
-    end
-    
-    get "/logout" do
+       get "/logout" do
         session.clear
         redirect "/"
     end

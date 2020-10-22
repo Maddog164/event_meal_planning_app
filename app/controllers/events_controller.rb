@@ -12,7 +12,7 @@ class EventsController < ApplicationController
 
     get '/events' do
        @events = Event.all
-       binding.pry
+      #  binding.pry
        erb :'/events/index' 
     end
     
@@ -35,19 +35,26 @@ class EventsController < ApplicationController
     end
     
      post '/events' do
-      binding.pry
-      hold_name = params[:"@new_event_name"]
-      hold_date = params[:"@new_event_date"]
-      if Event.where("name = ? AND date = ?", "Caturday","November7,2020") == []
+      # binding.pry
+      if params[:event] != nil && params[:event] != []
+        # determines if user came in through new event or modify existing event
+        @event = Event.find(params[:event])
+        hold_name = @event.name
+        hold_date = @event.date
+      else
+        hold_name = params[:"@new_event_name"]
+        hold_date = params[:"@new_event_date"]
+      end
+      if Event.where("name = ? AND date = ?", hold_name, hold_date) == []
         # if this event name with this date does not exist, create a new event with 
         # these attributes
         @event = Event.new(:name=>hold_name,:date=>hold_date,:user_id=>session[:user_id])
         @event.save
-        binding.pry
+        # binding.pry
       end #if
       # binding.pry
       @event = Event.where(["name=? and date=?","#{hold_name}", "#{hold_date}"])
-      binding.pry
+      # binding.pry
       redirect "events/#{@event[0].id}/edit"
     end
 
@@ -58,6 +65,7 @@ class EventsController < ApplicationController
       @new_event_name = ""
       @new_event_date = ""
       @event = ""
+      # binding.pry
       erb :'/events/preedit'
     end
     
@@ -68,30 +76,42 @@ class EventsController < ApplicationController
     end
     
     get '/events/:id' do 
+      # binding.pry
       @event = Event.find(params[:id])
       erb :'/events/show'
     end
 
     patch '/events/:id' do 
-      binding.pry
+      # binding.pry
       @event = Event.find(params[:id])
       hold_name = params[:"event"]["name"]
       hold_date = params[:"event"]["date"]
       if !hold_name == @event.name || !hold_date == @event.date
+        # binding.pry
         #update event name and date with new name and date entered
         @event.update(name: hold_name,date: hold_date)
       end
-      if !params[:"dish"]["name"]==""
+      if params[:"dish"]["name"] != ""
+        # binding.pry
         #creating new dish that was entered and associating that dish with the event
         new_dish_name = params[:"dish"]["name"]
         new_dish_type = params[:"dish"]["type"]
-        new_dish_id = params[:"dish"]["id"] 
-        new_dish = Dish.new(:name=> new_dish_name, :type => new_dish_type)
-        Eventdish.new(:event_id => params[:id], :dish_id => new_dish_id)
-      end 
-      binding.pry
-
-      
+        new_dish = Dish.new(:name=> new_dish_name, :dish_type => new_dish_type)
+        new_dish.save
+        new_dish_id = new_dish.id 
+        new_eventdish = EventDish.new(:event_id => @event.id, :dish_id => new_dish_id)
+        new_eventdish.save
+        binding.pry
+      end
+      if params[:event][:dish_ids]!=[]
+        # binding.pry
+        #if dishes were checked, update event_dishes with appropriate dishes
+        #for event
+        @event.update(params[:event])
+      end
+      # binding.pry
+      erb :'/events/show'
+          
     end
 
 end

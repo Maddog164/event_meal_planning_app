@@ -15,7 +15,7 @@
  
     <h3>Existing Dishes</h3>
     <% @dishes.each do |dish| %>
-      <input type="checkbox" name="dish.name" id="<%= dish.name %>" value="<%= dish.id %>" <%='checked' if @event.dishes.include?(dish) %>>  <%= dish.name %></input><br>
+      <input type="checkbox" name="event[dish_ids][]" id="<%= dish.id %>" value="<%= dish.id %>" <%='checked' if @event.dishes.include?(dish) %>>  <%= dish.name %></input><br>
     <% end %>
     <br>
  
@@ -23,6 +23,7 @@
     <label>Name of Dish: </label>
     <br>
     <input type="text" name="dish[name]" id="dish_name"></input>
+    <label>Type of Dish: </label>
     <input type = "text" name="dish[type]" id ="dish_type"></input>
     <br><br>
  

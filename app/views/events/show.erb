@@ -1,7 +1,13 @@
+<style>
+  .tab1 {tab_size: 8;}
+</style>
+
 <h1><%=@event.name%></h1>
+<h2><%=@event.date%></h2>
 <h4>Dishes:</h4>
 <ul>
-  <%@event.dishes.each do |dishes|%>
-  <li><%=event.dish%></li>
+  <%@event.dishes.each do |dish|%>
+    <li><%=dish.name%>  
+
   <%end%>
 </ul>
