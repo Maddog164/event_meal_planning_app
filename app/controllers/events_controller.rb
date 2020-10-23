@@ -99,15 +99,18 @@ class EventsController < ApplicationController
         new_dish = Dish.new(:name=> new_dish_name, :dish_type => new_dish_type)
         new_dish.save
         new_dish_id = new_dish.id 
-        new_eventdish = EventDish.new(:event_id => @event.id, :dish_id => new_dish_id)
-        new_eventdish.save
-        binding.pry
+        # @new_eventdish = EventDish.new(:event_id => @event.id, :dish_id => new_dish_id)
+        # @new_eventdish.save
+        # binding.pry
       end
       if params[:event][:dish_ids]!=[]
         # binding.pry
+        params[:event][:dish_ids]<<new_dish_id
+        binding.pry
         #if dishes were checked, update event_dishes with appropriate dishes
         #for event
         @event.update(params[:event])
+       
       end
       # binding.pry
       erb :'/events/show'
