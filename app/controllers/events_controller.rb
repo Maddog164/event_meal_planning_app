@@ -34,8 +34,8 @@ class EventsController < ApplicationController
       erb :'/events/new2'
     end
     
-     post '/events' do
-      # binding.pry
+    post '/events' do
+      binding.pry
       if params[:event] != nil && params[:event] != []
         # determines if user came in through new event or modify existing event
         @event = Event.find(params[:event])

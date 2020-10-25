@@ -1,6 +1,3 @@
-<style>
-  .tab1 {tab_size: 8;}
-</style>
 
 <h1><%=@event.name%></h1>
 <h2><%=@event.date%></h2>
@@ -11,3 +8,15 @@
 
   <%end%>
 </ul>
+<br><br>
+<form action="/events" method="POST">
+  <h4>To make further edits to this event:</h4>
+  <input type="submit" value="Edit Further">
+  <input type="hidden" name="event" value="<%= @event.id %>">
+</form>
+<br>
+
+<h4><a href="/logout">Log Out</a> and return to the home screen:</h4>
+
+
+

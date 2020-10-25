@@ -4,8 +4,7 @@
          <% @events.each do |event| %>
             <% if event.name != nil && event.name != "" %>
                 <input type="radio" name= "event" id="<%= event.name %>" value="<%= event.id %>"> <%= event.name %> <%= event.date %>                 
-                <% @new_event_name = event.name %>
-                <% @new_event_date = event.date %>
+                
                 <br>
             <% end %>
         <% end %>
