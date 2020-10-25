@@ -15,6 +15,12 @@
   <input type="hidden" name="event" value="<%= @event.id %>">
 </form>
 <br>
+<form action="/events/<%=@event.id%>" method="POST">
+<h4>To DELETE this event:</h4>
+<input id="hidden" type="hidden" name="_method" value="delete">
+<input type="submit" value="Delete">
+</form>
+<br><br>
 
 <h4><a href="/logout">Log Out</a> and return to the home screen:</h4>
 

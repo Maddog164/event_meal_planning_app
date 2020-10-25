@@ -35,7 +35,7 @@ class EventsController < ApplicationController
     end
     
     post '/events' do
-      binding.pry
+      # binding.pry
       if params[:event] != nil && params[:event] != []
         # determines if user came in through new event or modify existing event
         @event = Event.find(params[:event])
@@ -103,10 +103,10 @@ class EventsController < ApplicationController
         # @new_eventdish.save
         # binding.pry
       end
-      if params[:event][:dish_ids]!=[]
-        # binding.pry
-        params[:event][:dish_ids]<<new_dish_id
+      if params[:event][:dish_ids]!=[] && params[:event][:dish_ids] != nil
         binding.pry
+        params[:event][:dish_ids]<<new_dish_id
+        # binding.pry
         #if dishes were checked, update event_dishes with appropriate dishes
         #for event
         @event.update(params[:event])
@@ -115,6 +115,13 @@ class EventsController < ApplicationController
       # binding.pry
       erb :'/events/show'
           
+    end
+  
+    delete '/events/:id' do
+      # binding.pry
+      @event = Event.find(params[:id])
+      @event.delete
+      redirect '/events/new'
     end
 
 end

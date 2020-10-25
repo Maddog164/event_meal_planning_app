@@ -26,7 +26,7 @@ class UsersController < ApplicationController
       end
     
     post "/login" do
-        binding.pry
+        # binding.pry
         @user = User.find_by(:name => params[:name])
         if @user && @user[:name]!="" && @user.authenticate(params[:password])
             # binding.pry
