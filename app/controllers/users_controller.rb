@@ -13,8 +13,9 @@ class UsersController < ApplicationController
       
     post "/signup" do
         user = User.new(:name => params[:name], :password => params[:password])
+        user.save
         # binding.pry
-        if user.save && user[:name]!=""
+        if user.save && user.name != ""
             redirect "/login"
         else
             redirect "/failure"
