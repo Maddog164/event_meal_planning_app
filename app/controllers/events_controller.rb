@@ -10,11 +10,11 @@ class EventsController < ApplicationController
         set :session_secret, "password_security"
     end
 
-    get '/events' do
-       @events = Event.all
-      #  binding.pry
-       erb :'/events/index' 
-    end
+    # get '/events' do
+    #    @events = Event.all
+    #   #  binding.pry
+    #    erb :'/events/index' 
+    # end
     
     get '/events/new' do
         # binding.pry
@@ -30,18 +30,18 @@ class EventsController < ApplicationController
     end
 
     get '/events/new2' do
-      # binding.pry
       erb :'/events/new2'
     end
     
     post '/events' do
       # binding.pry
       if params[:event] != nil && params[:event] != []
-        # determines if user came in through new event or modify existing event
+        # user wants to modify existing event
         @event = Event.find(params[:event])
         hold_name = @event.name
         hold_date = @event.date
       else
+        # user wants to create a new event
         hold_name = params[:"@new_event_name"]
         hold_date = params[:"@new_event_date"]
       end
@@ -104,7 +104,7 @@ class EventsController < ApplicationController
         # binding.pry
       end
       if params[:event][:dish_ids]!=[] && params[:event][:dish_ids] != nil
-        binding.pry
+        # binding.pry
         params[:event][:dish_ids]<<new_dish_id
         # binding.pry
         #if dishes were checked, update event_dishes with appropriate dishes
