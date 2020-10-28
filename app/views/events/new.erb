@@ -2,23 +2,25 @@
 
 <% if @events == nil || @events == [] %>
     <h2>You do not currently have any defined Events </h2> 
+    <br>
+   
 <% else %>
     <h2>Your Upcoming Events: </h2>
-    <% @events.each do |event| %>
+    <% @events.each do |event| %>   
         <h3><%= "#{event.name}  #{event.date}" %></h3>
     <% end %>
+    <br>
+    <form method='get' action='/events/preedit'>
+    <input type="submit" value="Modify an existing Event">
+    </form>
 <% end %>
 <br>
-<h2>What would you like to do? Create a New Event or Modify an existing Event?</h2>
-<br>
 <form method='get' action='/events/new2'>
-    <input type="submit" value="Create a New Event">
-</form>
+<input type="submit" value="Create a New Event">
+</form> 
 <br>
-<form method='get' action='/events/preedit'>
-    <input type="submit" value="Modify an existing Event">
-</form>
 <br>
+
 <h4><a href="/logout">Log Out</a> and return to the home screen:</h4>
   
 </form>

@@ -53,7 +53,7 @@ class EventsController < ApplicationController
         # binding.pry
       end #if
       # binding.pry
-      @event = Event.where(["name=? and date=?","#{hold_name}", "#{hold_date}"])
+      @event = Event.where(["name=? and date=? and user_id=?","#{hold_name}", "#{hold_date}", session[:user_id]])
       # binding.pry
       redirect "events/#{@event[0].id}/edit"
     end

@@ -12,13 +12,17 @@ class UsersController < ApplicationController
     end
       
     post "/signup" do
+        # if User.exists?(:name => params[:name])
+        #     # do not allow duplicate user names 
+        #     erb :'users/failure'
+        # end
         user = User.new(:name => params[:name], :password => params[:password])
         user.save
         # binding.pry
         if user.save && user.name != ""
             redirect "/login"
         else
-            redirect "/failure"
+            erb :'users/failure'
         end
     end
 
