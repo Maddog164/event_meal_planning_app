@@ -29,3 +29,9 @@ The user controller handles typical user signup, login, and failure
 The events controller handles displaying events, and allows the user to add and modify events
 
 The dishes controller has not been built out. The idea is that a user could add dishes in bulk (a url link, a csv file, etc.) in a future generation
+
+Contributing
+    Bug reports and pull requests are welcome on GitHub at https://github.com/'kooky-selector-4991'/event_meal_planning_app. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the Contributor Covenant code of conduct.
+
+License
+    This gem is available as open source under the terms of the MIT License.
