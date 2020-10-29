@@ -103,6 +103,12 @@ class EventsController < ApplicationController
         # @new_eventdish.save
         # binding.pry
       end
+      if params[:event][:dish_ids] == [] || params[:event][:dish_ids] == nil
+        #delete dishes from event if all dishes were de-selected
+        EventDish.where("event_id= ?","#{params[:id]}").delete_all
+        params[:event][:dish_ids] = new_dish_id
+      end
+      # binding.pry
       if params[:event][:dish_ids]!=[] && params[:event][:dish_ids] != nil
         # binding.pry
         params[:event][:dish_ids]<<new_dish_id
@@ -110,7 +116,7 @@ class EventsController < ApplicationController
         #if dishes were checked, update event_dishes with appropriate dishes
         #for event
         @event.update(params[:event])
-       
+               
       end
       # binding.pry
       erb :'/events/show'
